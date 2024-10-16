@@ -24,8 +24,6 @@ To run the app locally, follow these steps:
    git clone <repository_url>
    cd <repository_directory>
 2.Install Required Packages:
-
-```bash
    pip install -r requirements.txt
 
 3.Run the Streamlit App:
