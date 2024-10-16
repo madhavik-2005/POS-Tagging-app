@@ -30,21 +30,22 @@ To run the app locally, follow these steps:
    streamlit run app.py
 
 
-Usage
+##Usage
+
 Open the app in your web browser.
 Select the input type from the available options (Image, PDF, Text File, Manual Input).
 Provide the necessary input (image, PDF, text file, or manual text).
 Click the Submit button to view the POS tagging results and execution time.
 
-Customization
+##Customization
 To modify the POS tagging behavior, edit the pos_dictionary.txt file, which contains words and their corresponding POS tags. Each line should follow the format:
 word tag
 example: dog NN
 
-License
+##License
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
-Acknowledgments
+##Acknowledgments
 Special thanks to the contributors and libraries that made this project possible.
 
 ### Notes for Customization:
