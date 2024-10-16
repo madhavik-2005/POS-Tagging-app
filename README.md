@@ -23,11 +23,14 @@ To run the app locally, follow these steps:
    ```bash
    git clone <repository_url>
    cd <repository_directory>
-Install Required Packages:
-pip install -r requirements.txt
+2.Install Required Packages:
 
-Run the Streamlit App:
-streamlit run app.py
+```bash
+   pip install -r requirements.txt
+
+3.Run the Streamlit App:
+   streamlit run app.py
+
 
 Usage
 Open the app in your web browser.
