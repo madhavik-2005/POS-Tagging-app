@@ -6,7 +6,7 @@ import re
 import time  
 import multiprocess as mp  # Import the multiprocess library
 
-# Function to load the POS dictionary
+# Updated function to load the POS dictionary
 def load_pos_dictionary(filename):
     pos_dict = {}
     try:
@@ -15,11 +15,13 @@ def load_pos_dictionary(filename):
                 line = line.strip()
                 if not line:
                     continue
-                parts = line.split()
-                if len(parts) != 2:
+                # Split the line into words and tags
+                parts = re.findall(r'(\w+)\s+(\w+)', line)
+                if not parts:
                     st.warning(f"Skipped invalid dictionary line: {line}")
                     continue
-                word, tag = parts
+                # Take the first word-tag pair
+                word, tag = parts[0]
                 pos_dict[word.lower()] = tag
     except Exception as e:
         st.error(f"Error loading POS dictionary: {e}")
@@ -48,7 +50,7 @@ def process_token(token, pos_dictionary):
     clean_token = re.sub(r'[^\w\s]', '', token).lower()
     tag = pos_dictionary.get(clean_token, "UNK")
     description = get_pos_description(tag) if tag != "UNK" else "unknown"
-    return f"{token} : {tag} ({description})"
+    return f"{token} : {tag} ({description})", tag == "UNK"
 
 # Function to process the uploaded image
 def process_image(image):
@@ -103,9 +105,13 @@ def main():
             execution_time = time.perf_counter() - start_time  
             
             st.subheader("POS Tagging Results")
-            for result in pos_results:
+            unknown_count = 0
+            for result, is_unknown in pos_results:
                 st.write(result)
+                if is_unknown:
+                    unknown_count += 1
             st.success(f"Execution Time: {execution_time:.6f} seconds")
+            st.info(f"Number of unknown words: {unknown_count}")
         else:
             st.warning("Please provide some input.")
 
